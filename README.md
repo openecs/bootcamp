@@ -15,12 +15,12 @@
 ### Getting Started
 * DevOps Engineer Onboarding
 
-### Infrastructure Services
-* Hybrid Cloud and DevOps Environment
+### Infrastructure Service
+* Hybrid Cloud Architecture
 * Infrastructure as Code
 * Site Reliability Management
 
-### Platform Services
+### Platform Service
 * Installing and Using GitLab
 * Installing and Using Nexus 
 * Installing and Using Elastic ELK
@@ -32,13 +32,11 @@
 * Installing and Using HAProxy
 * Installing and Using HashiCorp Vault
 	
-### Application Services
-
+### Application Service
 * Microservices Development
 * Trunk Base Development (TBD)
 * Continuous Integration and Deployment
 * Release and Hotfix Management
-* Deploying SaaS to AWS
 	
 ### Operations Management
 * Configuration Management
