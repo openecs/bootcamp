@@ -10,7 +10,6 @@
 * Master techniques to effectively communicate the progress and results of your DevOps efforts to management.
 * Learn how to transform  infrastructure and operations from an unpredictable cost center to a strategic source of business value and competitive advantage.
 
-
 ## Workshop Series
 
 ### Getting Started
@@ -34,11 +33,12 @@
 * Installing and Using HashiCorp Vault
 	
 ### Application Services
-Microservices Development
-Trunk Base Development (TBD)
-Continuous Integration and Deployment
-Release and Hotfix Management
-Deploying SaaS to AWS
+
+* Microservices Development
+* Trunk Base Development (TBD)
+* Continuous Integration and Deployment
+* Release and Hotfix Management
+* Deploying SaaS to AWS
 	
 ### Operations Management
 * Configuration Management
