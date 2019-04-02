@@ -8,7 +8,7 @@ This bootcamp series is based on a real-world implemenation of DevOps practices.
 ## Objectives
 * Learn to leverage cloud provisioning, automation, configuration management tools.
 * Get real-world techniques for implementing agile concepts in continous integration, continuous delivery and continous monitoring.
-* Practice writing secured, repeatable, and scalable containerized services. 
+* Practice writing secured, reliable, and scalable containerized services. 
 * Master techniques to effectively communicate the progress and results of your DevOps efforts to management.
 * Learn how to transform  infrastructure and operations from an unpredictable cost center to a strategic source of business value and competitive advantage.
 
