@@ -1,3 +1,5 @@
+This bootcamp series is based on a real-world implemenation of DevOps practices.
+
 ## Goals
 * Share and teach practical DevOps skills.
 * Master the soft skills as a successful DevOps engineer.
