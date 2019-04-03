@@ -3,7 +3,10 @@
 #
 # Usage:
 # brew bundle [--file=Brewfile]
-#
+# brew outdated
+# brew upgrade
+# brew cleanup [package]
+# 
 
 ######## 
 # add third-party repositories
@@ -16,7 +19,7 @@ tap 'homebrew/services'
 # install cli and tools
 # use 'brew info <tool>' to check the available version to install.  
 #
-brew 'ansible@2.0'
+brew 'ansible'
 brew 'awscli'
 brew 'terraform'
 brew 'kubernetes-cli'
@@ -35,3 +38,7 @@ cask 'textmate'
 cask 'visual-studio-code'
 cask 'postman'
 cask 'minikube'
+
+########
+# depends on java
+brew gradle
