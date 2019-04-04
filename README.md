@@ -1,20 +1,22 @@
-The objectives of this bootcamp series is to introduce the DevOps concepts and practices using real-world examples and use cases. Through the hands-on workshop, you will master the essential skills for agile development, continous integration (CI) and continous delivery (CD).
+## Bootcamp Objectives
+The objectives of the bootcamp series is to introduce the DevOps concepts and practices using real-world examples and use cases. Through a series of hands-on workshop, you will master the essential skills for agile development, continous integration (CI), continous delivery (CD), and operations monitoring.
 
-## Workshop Series
+### DevOps Toolchain
+* Installing and using VirtualBox and Vagrant
+* Installing and Using Java and SDK Tools
+* Installing and Using Ansible
+* Installing and Using Jenkins
+* Installing and Using Docker and Kubernetes
+* Installing and Using GitLab
+* Installing and Using Nexus
 
-### Getting Started
-* Introduction to CI and CD
-
-### Infrastructure Service
+### Cloud Infrastructure
 * Hybrid Cloud Architecture
 * Infrastructure as Code
 * Site Reliability Management
 
-### Platform Service
-* Installing and Using GitLab
-* Installing and Using Nexus 
+### Platform Services
 * Installing and Using Elastic ELK
-* Installing and Using Docker and Kubernetes
 * Installing and Using Redis
 * Installing and Using MongoDB
 * Installing and Using RabbitMQ
