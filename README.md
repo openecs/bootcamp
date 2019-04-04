@@ -1,21 +1,9 @@
-This bootcamp series is based on a real-world implemenation of DevOps practices.
-
-## Goals
-* Share and teach practical DevOps skills.
-* Master the soft skills as a successful DevOps engineer.
-
-
-## Objectives
-* Learn to leverage cloud provisioning, automation, configuration management tools.
-* Get real-world techniques for implementing agile concepts in continous integration, continuous delivery and continous monitoring.
-* Practice writing secured, reliable, and scalable containerized services. 
-* Master techniques to effectively communicate the progress and results of your DevOps efforts to management.
-* Learn how to transform  infrastructure and operations from an unpredictable cost center to a strategic source of business value and competitive advantage.
+The objectives of this bootcamp series is to introduce the DevOps concepts and practices using real-world examples and use cases. Through the hands-on workshop, you will master the essential skills for agile development, continous integration (CI) and continous delivery (CD).
 
 ## Workshop Series
 
 ### Getting Started
-* DevOps Engineer Onboarding
+* Introduction to CI and CD
 
 ### Infrastructure Service
 * Hybrid Cloud Architecture
