@@ -4,7 +4,7 @@ The objectives of the bootcamp series is to introduce the DevOps concepts and pr
 ### Workshop
 * DevOps Toolchain
 * Infrastructure as Code
-* Develop Microservice Container
+* Microservice and Container
 * Site Reliability Engineering
 * Security and Compliance
 * Self-service Operations
