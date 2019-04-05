@@ -29,7 +29,7 @@ brew 'kubernetes-cli'
 # to check the available tab version 'brew search <app>'
 #
 cask 'iterm2'
-cask 'java8'
+cask 'caskroom/versions/java8'
 cask 'virtualbox'
 cask 'vagrant'
 cask 'vagrant-manager'
@@ -37,8 +37,10 @@ cask 'docker'
 cask 'textmate'
 cask 'visual-studio-code'
 cask 'postman'
+# need to remove binary if not install with brew
+# https://kubernetes.io/docs/tasks/tools/install-minikube/#install-minikube
 cask 'minikube'
 
 ########
 # depends on java
-brew gradle
+brew 'gradle'
