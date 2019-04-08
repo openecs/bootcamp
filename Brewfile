@@ -14,6 +14,7 @@
 tap 'caskroom/cask'
 tap 'caskroom/versions'
 tap 'homebrew/services'
+tap 'pivotal/tap'
 
 ########
 # install cli and tools
@@ -44,3 +45,6 @@ cask 'minikube'
 ########
 # depends on java
 brew 'gradle'
+brew 'springboot'
+brew 'maven'
+
