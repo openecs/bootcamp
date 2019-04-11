@@ -52,6 +52,23 @@ git clone https://github.com/openecs/bootcamp.git
 cd bootscamp
 brew bundle
 ```
+6. To verify the tools are installed, open the installed iIterm2 terminal application from Lauchpad and execute the following comand to spin up two virtual machines (VMs) in VirtualBox.
+```
+cd ~/workspace/bootcamp
+vagrant up
+```
+From the Launchpad, open VirtualBox. You should see the two VMs, app01 and app02, are running.
+
+7. You can connect to a running VM with this command, vagrant ssh <hostname>. For example
+```
+cd ~/workspace/bootcamp
+vagrant ssh app01
+```
+8. To destroy the two VMs, execute this command inside iTerm2.
+```
+cd ~/workspace/bootcamp
+vagrant destroy
+```
 
 
 ## Installing Command Line Tools on Windows
