@@ -1,4 +1,4 @@
-## Installing Command Line Tools in Mac OS X
+## Installing Command Line Tools on Mac OS X
 
 1. Launch the Terminal in the Applications/Utilities folder or on the Launchpad
 2. Type the following command:
@@ -45,3 +45,15 @@ It will install the following script and directories:
 /usr/local/Homebrew
 /usr/local/Frameworks
 ```
+5. Once Homebrew installed, you can now download this repo and run the brew command to install the rest of the tools specified in the Brewfile. Assume the workspace directory is already created.
+```
+cd ~/workspace
+git clone https://github.com/openecs/bootcamp.git
+cd bootscamp
+brew bundle
+```
+
+
+## Installing Command Line Tools on Windows
+
+
