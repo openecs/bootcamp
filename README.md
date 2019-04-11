@@ -13,5 +13,18 @@ The objectives of the bootcamp series is to introduce the DevOps concepts and pr
 ## Prerequisites and Requirements
 * Basic Linux and Windows Commands
 * Some Java programming experience
-* A GitHub acccount
+* GitHub and DockerHub acccounts
+* Install the following recommended development tools
+  - iTerm2 (Mac)
+  - Java 8
+  - Gradle
+  - Visual Studio Code or Eclipse
+  - VirtualBox
+  - Vagrant
+  - Git for Windows (Windows)
+  - Ansible
+  - AWS CLI
+  - Terraform
+  - Kubernetes-cli
+  - Minikube
 
