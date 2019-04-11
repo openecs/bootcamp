@@ -17,14 +17,18 @@ The objectives of the bootcamp series is to introduce the DevOps concepts and pr
 * Install the following recommended development tools
   - iTerm2 (Mac)
   - Java 8
+  - Python 3.6 or above
   - Gradle
   - Visual Studio Code or Eclipse
   - VirtualBox
   - Vagrant
   - Git for Windows (Windows)
+  - Postman
   - Ansible
   - AWS CLI
   - Terraform
-  - Kubernetes-cli
+  - Docker
+  - Kubernetes CLI
   - Minikube
 
+You can follow the [SETUP.md](SETUP.md) to install the above recommended tools on your Mac or Windows.
