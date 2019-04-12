@@ -52,6 +52,11 @@ git clone https://github.com/openecs/bootcamp.git
 cd bootscamp
 brew bundle
 ```
+Note for High Sierra 10.13 or above, VirtualBox installation will fail unless you allow loading new system extenstion(s) in System Preferences > Security & Privacy. Click the "Allow" button and reinstall with the following command.
+```
+brew cask install virtualbox
+```
+
 6. To verify the tools are installed, open the installed iIterm2 terminal application from Lauchpad and execute the following comand to spin up two virtual machines (VMs) in VirtualBox.
 ```
 cd ~/workspace/bootcamp
