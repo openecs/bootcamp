@@ -76,6 +76,10 @@ cd ~/workspace/bootcamp
 vagrant destroy
 ```
 
+9. To activate Docker, open Docker from Lauchpad to start and configure the Docker Daemon to run. Once done, you can run the docker commands like
+```
+docker ps
+```
 
 ## Installing Command Line Tools on Windows
 
