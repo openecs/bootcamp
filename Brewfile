@@ -23,7 +23,6 @@ tap 'pivotal/tap'
 brew 'ansible'
 brew 'awscli'
 brew 'terraform'
-brew 'docker'
 brew 'kubernetes-cli'
 
 ########
