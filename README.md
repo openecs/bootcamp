@@ -5,8 +5,6 @@ The objectives of the bootcamp series is to introduce the DevOps concepts and pr
 * [DevOps Toolchain](https://github.com/openecs/bootcamp/wiki/DevOps-Toolchain)
 * Infrastructure as Code
 * Microservice and Container
-* Monitoring
-* Incident Management
 * Site Reliability Engineering
 * Security and Compliance
 * Self-service Operations
