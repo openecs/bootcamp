@@ -1,34 +1,14 @@
-## Bootcamp Objectives
-The objectives of the bootcamp series is to introduce the DevOps concepts and practices using real-world examples and use cases. Through a series of hands-on workshop, you will master the essential skills for agile development, continuous integration (CI), continuous delivery (CD), and site reliability management.
+## DevOps Bootcamp
+Learn DevOps best practices and build your hybrid cloud infrastructure as code. See how to automate your continuous integration, continuous deployment and continuous monitoring using the DevOps toolchain.
+
+### Real-world DevOps
+This is not a high-level theoretical course, but hands-on workshops based on real-world use cases put together from implementing DevOps practices with customers and companies.
 
 ### Workshops
-* [DevOps Toolchain](https://github.com/openecs/bootcamp/wiki/DevOps-Toolchain)
+* DevOps Toolchain
 * Infrastructure as Code
-* Microservice and Container
-* Site Reliability Engineering
+* Configuration Management
+* Site Reliability Enginneering
 * Security and Compliance
-* Self-service Operations
-* Agile Project Management
+* Enterprise Monitoring
 
-## Prerequisites and Requirements
-* Basic Linux and Windows Commands
-* Some Java programming experience
-* GitHub and DockerHub acccounts
-* Install the following recommended development tools
-  - iTerm2 (Mac)
-  - Java 8
-  - Python 3.6 or above
-  - Gradle
-  - Visual Studio Code or Eclipse
-  - VirtualBox
-  - Vagrant
-  - Git for Windows (Windows)
-  - Postman
-  - Ansible
-  - AWS CLI
-  - Terraform
-  - Docker
-  - Kubernetes CLI
-  - Minikube
-
-You can follow the [SETUP.md](SETUP.md) to install the above recommended tools on your Mac or Windows.
