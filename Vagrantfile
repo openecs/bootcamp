@@ -52,7 +52,29 @@ Vagrant.configure("2") do |config|
     app02.trigger.before [:destroy] do |trigger|
       trigger.info = "Remove VM from known_hosts..."
       trigger.run = {inline: "ssh-keygen -R #{app02.vm.hostname}"}
-    end    
+    end
+  end
+
+  config.vm.define "mon01" do |mon01|
+    app01.vm.box = "ubuntu/xenial64"
+    app01.vm.hostname = "mon01"
+
+    app01.vm.provider "virtualbox" do |v|
+      v.name = "#{mon01.vm.hostname}"
+      v.memory = 1024
+      v.cpus = 1
+    end
+
+    config.vm.provision "file", 
+      source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/id_rsa.pub"
+
+    config.vm.provision "shell",
+      path: "scripts/copy-ssh-keys.sh"
+    
+    mon01.trigger.before [:destroy] do |trigger|
+      trigger.info = "Remove VM from known_hosts..."
+      trigger.run = {inline: "ssh-keygen -R #{mon01.vm.hostname}"}
+    end   
   end
 
   config.hostmanager.enabled = true
