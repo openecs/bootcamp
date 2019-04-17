@@ -56,10 +56,10 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "mon01" do |mon01|
-    app01.vm.box = "ubuntu/xenial64"
-    app01.vm.hostname = "mon01"
+    mon01.vm.box = "ubuntu/xenial64"
+    mon01.vm.hostname = "mon01"
 
-    app01.vm.provider "virtualbox" do |v|
+    mon01.vm.provider "virtualbox" do |v|
       v.name = "#{mon01.vm.hostname}"
       v.memory = 1024
       v.cpus = 1
