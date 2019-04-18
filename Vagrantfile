@@ -10,13 +10,13 @@ Vagrant.configure("2") do |config|
     trigger.run = {path: "./scripts/create-ssh-keys.sh"}
   end
 
-  config.vm.define "app01" do |app01|
-    app01.vm.box = "ubuntu/xenial64"
-    app01.vm.hostname = "app01"
-    #app01.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.define "dev01" do |dev01|
+    dev01.vm.box = "ubuntu/xenial64"
+    dev01.vm.hostname = "dev01"
+    #dev01.vm.network "forwarded_port", guest: 80, host: 8080
 
-    app01.vm.provider "virtualbox" do |v|
-      v.name = "#{app01.vm.hostname}"
+    dev01.vm.provider "virtualbox" do |v|
+      v.name = "#{dev01.vm.hostname}"
       v.memory = 1024
       v.cpus = 1
     end
@@ -27,18 +27,18 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell",
       inline: "grep -F '# My SSH Key' /home/vagrant/.ssh/authorized_keys || (echo '# My SSH Key' >> /home/vagrant/.ssh/authorized_keys && cat /home/vagrant/.ssh/id_rsa.pub >> /home/vagrant/.ssh/authorized_keys)"      
   
-    app01.trigger.before [:destroy] do |trigger|
+    dev01.trigger.before [:destroy] do |trigger|
       trigger.info = "Remove VM from known_hosts..."
-      trigger.run = {inline: "ssh-keygen -R #{app01.vm.hostname}"}
+      trigger.run = {inline: "ssh-keygen -R #{dev01.vm.hostname}"}
     end
   end
 
-  config.vm.define "app02" do |app02|
-    app02.vm.box = "centos/7"
-    app02.vm.hostname = "app02"
+  config.vm.define "dev02" do |dev02|
+    dev02.vm.box = "centos/7"
+    dev02.vm.hostname = "dev02"
 
-    app02.vm.provider "virtualbox" do |v|
-      v.name = "#{app02.vm.hostname}"
+    dev02.vm.provider "virtualbox" do |v|
+      v.name = "#{dev02.vm.hostname}"
       v.memory = 1024
       v.cpus = 1
     end
@@ -48,18 +48,18 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell",
       path: "scripts/copy-ssh-keys.sh"
 
-    app02.trigger.before [:destroy] do |trigger|
+    dev02.trigger.before [:destroy] do |trigger|
       trigger.info = "Remove VM from known_hosts..."
-      trigger.run = {inline: "ssh-keygen -R #{app02.vm.hostname}"}
+      trigger.run = {inline: "ssh-keygen -R #{dev02.vm.hostname}"}
     end
   end
 
-  config.vm.define "mon01" do |mon01|
-    mon01.vm.box = "ubuntu/xenial64"
-    mon01.vm.hostname = "mon01"
+  config.vm.define "ops01" do |ops01|
+    ops01.vm.box = "ubuntu/xenial64"
+    ops01.vm.hostname = "ops01"
 
-    mon01.vm.provider "virtualbox" do |v|
-      v.name = "#{mon01.vm.hostname}"
+    ops01.vm.provider "virtualbox" do |v|
+      v.name = "#{ops01.vm.hostname}"
       v.memory = 1024
       v.cpus = 1
     end
@@ -70,9 +70,9 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell",
       path: "scripts/copy-ssh-keys.sh"
     
-    mon01.trigger.before [:destroy] do |trigger|
+    ops01.trigger.before [:destroy] do |trigger|
       trigger.info = "Remove VM from known_hosts..."
-      trigger.run = {inline: "ssh-keygen -R #{mon01.vm.hostname}"}
+      trigger.run = {inline: "ssh-keygen -R #{ops01.vm.hostname}"}
     end   
   end
 
