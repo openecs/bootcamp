@@ -35,7 +35,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "app02" do |app02|
     app02.vm.box = "centos/7"
-    config.vm.box_version = "1804.02"
     app02.vm.hostname = "app02"
 
     app02.vm.provider "virtualbox" do |v|
