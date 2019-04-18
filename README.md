@@ -8,7 +8,8 @@ This is not a high-level theoretical course, but hands-on workshops based on rea
 * DevOps Toolchain
 * Infrastructure as Code
 * Configuration Management
-* Site Reliability Enginneering
+* Microservices and Kubernetes
+* Site Reliability Engineering
 * Security and Compliance
 * Enterprise Monitoring
 
