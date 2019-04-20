@@ -1,0 +1,7 @@
+# https://jenkins.io/download/
+# https://pkg.jenkins.io/debian-stable/binary/jenkins_2.164.2_all.deb
+# https://pkg.jenkins.io/redhat-stable/jenkins-2.164.2-1.1.noarch.rpm
+
+jenkins_version: 2.164.2
+jenkins_pkg_name: jenkins_{{jenkins_version}}_all.deb
+jenkins_pkg_url: https://pkg.jenkins.io/debian-stable/binary/{{jenkins_pkg_name}}

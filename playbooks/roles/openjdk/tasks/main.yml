@@ -1,0 +1,5 @@
+---
+# tasks file for openjdk
+
+- name: include OS specific install
+  include: "install_{{ ansible_os_family | lower }}.yml"

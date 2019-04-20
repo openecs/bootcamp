@@ -1,0 +1,8 @@
+---
+# tasks file for jenkins
+
+- name: include OS-specific variables
+  include_vars: "{{ ansible_os_family | lower }}.yml"
+
+- name: include OS specific install
+  include: "install_{{ ansible_os_family | lower }}.yml"

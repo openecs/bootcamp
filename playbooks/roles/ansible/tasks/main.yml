@@ -1,0 +1,26 @@
+---
+# tasks file for ansible
+
+- name: install pip if not present
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+    allow_unauthenticated: yes
+  with_items:
+    - python-pip
+    - python-dev
+    - python-mysqldb
+    - unzip
+
+- name: copy pip requirements.txt file to remote 
+  copy:
+    src: requirements.txt
+    dest: /tmp/requirments.txt
+
+# Check where pip install the packages:
+#   python -m site [--user-site]
+- name: install ansible using pip
+  pip:
+    requirements: /tmp/requirments.txt
+    state: present

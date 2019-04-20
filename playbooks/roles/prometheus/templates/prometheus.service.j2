@@ -1,0 +1,15 @@
+[Unit]
+Description=IoT Microservices
+
+[Service]
+User={{app_owner}}
+WorkingDirectory={{app_home}}/{{app_version}}
+ExecStart={{app_dest_dir}}/{{app_version}}/{{app_name}}
+SuccessExitStatus=0
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+KillSignal=2
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,21 @@
+---
+# defaults file for prometheus
+
+# Version History
+# https://prometheus.io/download/
+# https://github.com/prometheus/prometheus/releases/download/v2.9.1/prometheus-2.9.1.linux-amd64.tar.gz
+
+app_env: local
+app_name: prometheus
+app_version: 2.9.1
+app_home: "/apps/{{app_name}}"
+app_owner: openecs
+app_group: openecs
+
+app_pkg_name: "prometheus-{{app_version}}.linux-amd64.tar.gz"
+app_pkg_url: "https://github.com/prometheus/prometheus/releases/download/v{{app_version}}/{{app_pkg_name}}"
+app_dir_name: "prometheus-{{app_version}}.linux-amd64"
+
+app_src_dir: "/apps/build/{{app_name}}/dist"
+app_dest_dir: "{{app_home}}"
+

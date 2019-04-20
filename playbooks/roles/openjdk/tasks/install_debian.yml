@@ -1,0 +1,41 @@
+- name: check if openjdk version is installed
+  stat:
+    path: "{{openjdk_home}}/jdk-{{openjdk_version}}"
+  register: openjdk
+
+- name: creates openjdk home directory if not exist 
+  file:
+    path: "{{openjdk_home}}"
+    state: directory
+    recurse: yes  
+  when: openjdk.stat.exists == false
+
+- name: download openjdk if not installed
+  get_url:
+    url: "{{openjdk_url}}"
+    dest: "{{openjdk_home}}"
+  when: openjdk.stat.exists == false
+
+- name: unpackage openjdk
+  unarchive:
+    src: "{{openjdk_home}}/{{openjdk_pkg}}"
+    dest: "{{openjdk_home}}/"
+    remote_src: yes
+  when: openjdk.stat.exists == false
+
+- name: change openjdk owner 
+  file:
+    path: "{{openjdk_home}}"
+    owner: "{{ openjdk_owner | default('root')}}"
+    group: "{{ openjdk_group | default('root')}}"
+    recurse: yes  
+  when: openjdk.stat.exists == false
+
+- name: create a java home symlink 
+  file:
+    path: "/usr/java"
+    src: "{{openjdk_home}}/jdk-{{openjdk_version}}"
+    owner: "{{ openjdk_owner | default('root')}}"
+    group: "{{ openjdk_group | default('root')}}"
+    state: link
+#  when: openjdk.stat.exists == false   

@@ -70,6 +70,10 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell",
       path: "scripts/copy-ssh-keys.sh"
     
+    ops01.vm.provision "ansible" do |ansible|
+      ansible.playbook = "playbooks/ops-console.yml"
+    end    
+
     ops01.trigger.before [:destroy] do |trigger|
       trigger.info = "Remove VM from known_hosts..."
       trigger.run = {inline: "ssh-keygen -R #{ops01.vm.hostname}"}

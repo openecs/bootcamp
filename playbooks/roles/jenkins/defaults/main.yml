@@ -1,0 +1,24 @@
+---
+# defaults file for jenkins
+
+# https://jenkins.io/download/
+# https://pkg.jenkins.io/debian-stable/binary/jenkins_2.164.2_all.deb
+# https://pkg.jenkins.io/redhat-stable/jenkins-2.164.2-1.1.noarch.rpm
+
+# Java executable needs to be in the path
+# ln -s /apps/java/jdk-11.0.2/bin/java /usr/local/bin/java
+
+
+# grafana_version: 2.164.2
+jenkins_name: jenkins
+jenkins_home: "/apps/{{jenkins_name}"
+
+# Variables
+jenkins_owner: jenkins
+jenkins_group: renkins
+#jenkins_pkg_name: "OS specific"
+#jenkins_pkg_url: "OS specific"
+jenkins_src_dir: "/apps/build/{{jenkins_name}}/dist"
+jenkins_dest_dir: "apps/build/{{jenkins_name}}/dist"
+
+jenkins_svc_name: jenkins
