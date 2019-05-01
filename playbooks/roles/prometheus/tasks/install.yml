@@ -1,0 +1,62 @@
+- name: check if the application version is already installed
+  stat:
+    path: "{{app_dest_dir}}"
+  register: app_facts
+
+- name: create the distribution directory if not exist 
+  file:
+    path: "{{app_src_dir}}"
+    state: directory
+    recurse: yes    
+  when: app_facts.stat.exists == false
+
+- name: create the application version directory if not exist 
+  file:
+    path: "{{app_dest_dir}}"
+    state: directory
+    recurse: yes  
+  when: app_facts.stat.exists == false
+
+- name: download the package to the distribution directory
+  get_url:
+    url: "{{app_pkg_url}}"
+    dest: "{{app_src_dir}}/{{app_pkg_name}}"
+  when: app_facts.stat.exists == false
+
+- name: unpackage
+  unarchive:
+    src: "{{app_src_dir}}/{{app_pkg_name}}"
+    dest: "{{app_dest_dir}}"
+    remote_src: yes
+  when: app_facts.stat.exists == false
+
+- name: rename the application directory to the version
+  command: mv {{app_dir_name}} {{app_version}}
+  args:
+    chdir: "{{app_dest_dir}}"
+  when: app_facts.stat.exists == false
+
+- name: change application owner 
+  file:
+    path: "{{app_dest_dir}}"
+    owner: "{{ app_owner | default('root')}}"
+    group: "{{ app_group | default('root')}}"
+    recurse: yes
+  when: app_facts.stat.exists == false
+  
+- name: run the application as service
+  template:
+    src: "{{app_name}}.service.j2"
+    dest: /etc/systemd/system/{{app_name}}.service
+
+- name: restart the service
+  systemd:
+    daemon_reload: yes
+    state: restarted
+    name: "{{ app_name }}"    
+
+- name: make sure the service is running
+  systemd:
+    state: started
+    enabled: yes
+    name: "{{ app_name }}"

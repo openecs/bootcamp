@@ -42,6 +42,7 @@ Vagrant.configure("2") do |config|
       v.memory = 1024
       v.cpus = 1
     end
+
     config.vm.provision "file", 
       source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/id_rsa.pub"
 
@@ -56,6 +57,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "ops01" do |ops01|
     ops01.vm.box = "ubuntu/xenial64"
+    #ops01.vm.box = "centos/7"
     ops01.vm.hostname = "ops01"
 
     ops01.vm.provider "virtualbox" do |v|
@@ -67,12 +69,15 @@ Vagrant.configure("2") do |config|
     config.vm.provision "file", 
       source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/id_rsa.pub"
 
+    config.vm.provision "file", 
+      source: "~/.ssh/id_rsa", destination: "~/.ssh/id_rsa"
+
     config.vm.provision "shell",
       path: "scripts/copy-ssh-keys.sh"
     
-    ops01.vm.provision "ansible" do |ansible|
-      ansible.playbook = "playbooks/ops-console.yml"
-    end    
+#    ops01.vm.provision "ansible" do |ansible|
+#      ansible.playbook = "playbooks/ops-console.yml"
+#    end    
 
     ops01.trigger.before [:destroy] do |trigger|
       trigger.info = "Remove VM from known_hosts..."

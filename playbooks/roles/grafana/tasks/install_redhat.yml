@@ -1,0 +1,26 @@
+- name: create the distribution directory if not exist 
+  file:
+    path: "{{grafana_src_dir}}"
+    state: directory
+    recurse: yes    
+
+- name: download the grafana package
+  get_url: 
+    url: "{{grafana_pkg_url}}"
+    dest: "{{grafana_src_dir}}"
+
+- name: install the grafana package
+  yum: 
+    name: "{{grafana_src_dir}}/{{grafana_pkg_name}}"
+
+- name: restart the service
+  systemd:
+    daemon_reload: yes
+    state: restarted
+    name: "{{ grafana_svc_name }}"    
+
+- name: make sure the service is running
+  systemd:
+    state: started
+    enabled: yes
+    name: "{{ grafana_svc_name }}"

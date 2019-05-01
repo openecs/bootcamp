@@ -10,13 +10,13 @@
     state: directory
     recurse: yes    
 
-- name: download the apt package
+- name: download the grafana package
   get_url: 
     url="{{grafana_pkg_url}}"
     dest="{{grafana_src_dir}}"
   when: grafana_check_installed.rc == 1  
 
-- name: install grafana apt package
+- name: install the grafana package
   apt: deb="{{grafana_src_dir}}/{{grafana_pkg_name}}"
   when: grafana_check_installed.rc == 1  
 

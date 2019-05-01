@@ -1,0 +1,11 @@
+- name: install pip if not present
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+    allow_unauthenticated: yes
+  with_items:
+    - python-pip
+    - python-dev
+    - python-mysqldb
+    - unzip

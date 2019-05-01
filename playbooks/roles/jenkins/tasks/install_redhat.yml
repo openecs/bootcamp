@@ -1,0 +1,35 @@
+- name: install required packages for jenkins
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - java-1.8.0-openjdk-devel
+    
+- name: add jenkins lts repository
+  get_url:
+    url: http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+    dest: /etc/yum.repos.d/jenkins.repo
+
+- name: add jenkins lts key
+  rpm_key:
+    key: https://jenkins-ci.org/redhat/jenkins-ci.org.key
+    state: present
+
+- name: install jenkins lts version
+  yum:
+    name: jenkins
+    state: present
+    update_cache: yes    
+
+- name: restart the service
+  systemd:
+    daemon_reload: yes
+    state: restarted
+    name: jenkins   
+
+- name: make sure the service is running
+  systemd:
+    state: started
+    enabled: yes
+    name: jenkins

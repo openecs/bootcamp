@@ -1,17 +1,8 @@
 ---
 # tasks file for ansible
 
-- name: install pip if not present
-  apt:
-    name: "{{ item }}"
-    state: present
-    update_cache: yes
-    allow_unauthenticated: yes
-  with_items:
-    - python-pip
-    - python-dev
-    - python-mysqldb
-    - unzip
+- name: include OS specific install
+  include: "install_{{ ansible_os_family | lower }}.yml"      
 
 - name: copy pip requirements.txt file to remote 
   copy:

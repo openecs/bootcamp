@@ -1,0 +1,16 @@
+- name: install epel repository
+  yum:
+    name: epel-release
+    state: present
+    update_cache: yes
+
+- name: install pip packages if not present
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - python-pip
+    - python-devel
+    - mysql-connector-python
+    - unzip

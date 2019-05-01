@@ -1,3 +1,6 @@
 [iotms]
 dev01
 dev02
+
+[ops-console]
+ops01

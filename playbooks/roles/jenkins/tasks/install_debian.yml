@@ -1,43 +1,37 @@
-- name: check if the package is installed
-  command: dpkg-query -W {{jenkins_name}}
-  register: jenkins_check_installed
-  failed_when: jenkins_check_installed.rc > 1
-  changed_when: jenkins_check_installed.rc == 1
-
-- name: install required packages if not present
+- name: install required packages for jenkins
   apt:
     name: "{{ item }}"
     state: present
     update_cache: yes
     allow_unauthenticated: yes
   with_items:
-    - openjdk-8-jdk  
-  when: jenkins_check_installed.rc == 1 
+    - openjdk-8-jdk
 
-- name: create the distribution directory if not exist 
-  file:
-    path: "{{jenkins_src_dir}}"
-    state: directory
-    recurse: yes    
+- name: add jenkins lts key
+  apt_key:
+    url: https://pkg.jenkins.io/debian/jenkins-ci.org.key
+    state: present
 
-- name: download the apt package
-  get_url: 
-    url="{{jenkins_pkg_url}}"
-    dest="{{jenkins_src_dir}}"
-  when: jenkins_check_installed.rc == 1  
+- name: add jenkins lts repository
+  apt_repository:
+    filename: jenkins.list
+    repo: deb https://pkg.jenkins.io/debian-stable binary/
+    state: present
 
-- name: install jenkins apt package
-  apt: deb="{{jenkins_src_dir}}/{{jenkins_pkg_name}}"
-  when: jenkins_check_installed.rc == 1  
+- name: install jenkins lts version
+  apt:
+    name: jenkins
+    state: present
+    update_cache: yes    
 
 - name: restart the service
   systemd:
     daemon_reload: yes
     state: restarted
-    name: "{{ jenkins_svc_name }}"    
+    name: jenkins    
 
 - name: make sure the service is running
   systemd:
     state: started
     enabled: yes
-    name: "{{ jenkins_svc_name }}"
+    name: jenkins
