@@ -35,9 +35,9 @@
 
   roles:
     - { role: common }
-    - { role: gradle } 
     - { role: ansible }
     - { role: jenkins }
+    - { role: gradle }     
     - { role: prometheus }
     - { role: grafana } 
    

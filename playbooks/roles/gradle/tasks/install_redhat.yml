@@ -7,3 +7,4 @@
     update_cache: yes
   loop:
     - unzip
+    - java-1.8.0-openjdk-devel

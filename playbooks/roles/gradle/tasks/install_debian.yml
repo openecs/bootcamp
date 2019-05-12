@@ -7,3 +7,4 @@
     state: present
   loop:
       - unzip
+      - openjdk-8-jdk   
