@@ -17,8 +17,27 @@
   become: yes
   gather_facts: true
 
+  vars:
+    app_owner: openecs
+    app_group: openecs
+        
+  pre_tasks:
+    - name: create the appliction group if not present
+      user:
+        name: "{{ app_group }}"
+        state: present
+
+    - name: create the applicatin user if not present
+      user:
+        name: "{{ app_owner }}"
+        group: "{{ app_group }}"
+        state: present  
+
   roles:
-      - { role: ansible }
-      - { role: jenkins }
-      - { role: prometheus }
-      - { role: grafana }     
+    - { role: common }
+    - { role: gradle } 
+    - { role: ansible }
+    - { role: jenkins }
+    - { role: prometheus }
+    - { role: grafana } 
+   

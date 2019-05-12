@@ -3,7 +3,8 @@
 - name: install the required sytem packages
   apt:
     update_cache: no
-    name: "{{ packages }}"
-  vars:
-    packages:
+    name: "{{ item }}"
+    state: present
+  loop:
       - unzip
+  

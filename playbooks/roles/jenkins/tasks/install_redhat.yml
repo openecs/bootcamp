@@ -3,7 +3,7 @@
     name: "{{ item }}"
     state: present
     update_cache: yes
-  with_items:
+  loop:
     - java-1.8.0-openjdk-devel
     
 - name: add jenkins lts repository

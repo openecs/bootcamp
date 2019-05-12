@@ -1,0 +1,19 @@
+---
+# defaults file for gradle
+
+# https://gradle.org/install/
+# https://services.gradle.org/distributions/gradle-5.4.1-bin.zip
+
+app_env: local
+app_name: gradle
+app_version: 5.4.1
+app_home: "/apps/{{app_name}}"
+app_owner: openecs
+app_group: openecs
+
+app_pkg_name: "gradle-{{app_version}}-bin.zip"
+app_pkg_url: "https://services.gradle.org/distributions/gradle-5.4.1-bin.zip"
+app_dir_name: "gradle-{{app_version}}"
+
+app_src_dir: "/apps/build/{{app_name}}/dist"
+app_dest_dir: "{{app_home}}"

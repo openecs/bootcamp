@@ -9,7 +9,7 @@
     name: "{{ item }}"
     state: present
     update_cache: yes
-  with_items:
+  loop:
     - python-pip
     - python-devel
     - mysql-connector-python

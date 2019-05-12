@@ -1,0 +1,19 @@
+---
+# tasks file for gradle
+
+- name: create the appliction group if not present
+  user:
+    name: "{{ app_group }}"
+    state: present
+
+- name: create the applicatin user if not present
+  user:
+    name: "{{ app_owner }}"
+    group: "{{ app_group }}"
+    state: present
+
+- name: include OS specific install
+  include: "install_{{ ansible_os_family | lower }}.yml"    
+
+- name: install the application
+  include: "install.yml"

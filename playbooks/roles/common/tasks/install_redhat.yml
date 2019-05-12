@@ -7,3 +7,4 @@
     update_cache: yes
   loop:
     - unzip
+    - tree

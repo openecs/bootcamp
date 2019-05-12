@@ -1,9 +1,9 @@
 # execute platform specific installation step
 
 - name: install the required sytem packages
-  yum:
+  apt:
+    update_cache: no
     name: "{{ item }}"
     state: present
-    update_cache: yes
   loop:
-    - unzip
+      - unzip

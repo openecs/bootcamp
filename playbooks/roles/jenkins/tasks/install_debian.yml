@@ -4,7 +4,7 @@
     state: present
     update_cache: yes
     allow_unauthenticated: yes
-  with_items:
+  loop:
     - openjdk-8-jdk
 
 - name: add jenkins lts key

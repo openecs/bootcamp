@@ -4,7 +4,7 @@
     state: present
     update_cache: yes
     allow_unauthenticated: yes
-  with_items:
+  loop:
     - python-pip
     - python-dev
     - python-mysqldb

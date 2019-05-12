@@ -6,3 +6,5 @@ jenkins_svc_name: jenkins
 
 jenkins_owner: jenkins
 jenkins_group: renkins
+
+jenkins_backup_dir: /apps/jenkins/backup

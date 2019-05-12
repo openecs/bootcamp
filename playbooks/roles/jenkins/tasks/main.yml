@@ -7,3 +7,10 @@
 - name: include OS specific install
   include: "install_{{ ansible_os_family | lower }}.yml"
 
+- name: create the jenkins backup directory if not exist 
+  file:
+    path: "{{jenkins_backup_dir}}"
+    state: directory
+    owner: jenkins
+    group: jenkins
+    recurse: yes 
