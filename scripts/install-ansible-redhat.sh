@@ -13,4 +13,4 @@ mkdir -p ~/workspace
 cd ~/workspace
 git clone https://github.com/openecs/bootcamp.git
 cd bootcamp/playbooks
-ansible-playbook --connection=local -i ops01, ops-console.yml
+ansible-playbook --connection=local -i localhost, ops-console.yml
