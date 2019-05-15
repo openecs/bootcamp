@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
   config.vm.network "private_network", :type => 'dhcp'
-  config.vm.synced_folder ".", "/vagrant", disabled: false
+  config.vm.synced_folder "~/workspace", "/vagrant", disabled: false
   config.vm.box_check_update = false
   config.vbguest.auto_update = false
   config.vagrant.plugins = ["vagrant-hostmanager", "vagrant-vbguest"]
@@ -74,10 +74,13 @@ Vagrant.configure("2") do |config|
 
     config.vm.provision "shell",
       path: "scripts/copy-ssh-keys.sh"
+
+    config.vm.provision "shell",
+      path: "scripts/install-ansible-debian.sh"      
     
-    ops01.vm.provision "ansible" do |ansible|
-      ansible.playbook = "playbooks/ops-console.yml"
-    end    
+    #ops01.vm.provision "ansible" do |ansible|
+    #  ansible.playbook = "playbooks/ops-console.yml"
+    #end    
 
     ops01.trigger.before [:destroy] do |trigger|
       trigger.info = "Remove VM from known_hosts..."
