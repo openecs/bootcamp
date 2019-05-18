@@ -30,8 +30,11 @@ brew 'kubernetes-cli'
 # to check the available tab version 'brew search <app>'
 #
 cask 'iterm2'
+#Oracle Java 8 will no longer available
 #cask 'caskroom/versions/java8'
-cask 'java8'
+#cask 'java8'
+cask 'java11'
+
 cask 'virtualbox'
 cask 'vagrant'
 cask 'vagrant-manager'
