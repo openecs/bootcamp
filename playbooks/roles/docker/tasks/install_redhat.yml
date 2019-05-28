@@ -1,0 +1,41 @@
+# execute platform specific installation step
+
+- name: install the required sytem packages
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+    - epel-release
+    - python-pip
+
+# repo saved to /etc/yum.repos.d/docker-ce.repo
+- name: add docker repository
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+
+- name: install docker
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - docker-ce 
+    - docker-ce-cli 
+    - containerd.io
+
+- name: restart the service
+  systemd:
+    daemon_reload: yes
+    state: restarted
+    name: docker    
+
+- name: make sure the service is running
+  systemd:
+    state: started
+    enabled: yes
+    name: docker
