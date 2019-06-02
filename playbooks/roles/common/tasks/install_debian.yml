@@ -9,3 +9,5 @@
       - unzip
       - tree
       - ntp
+      - aptitude
+      - python-apt

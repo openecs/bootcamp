@@ -4,10 +4,10 @@
 # subscription-manager repos --enable rhel-7-server-ansible-2.6-rpms
 
 # CentOS 7
-sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
-sudo yum update
-sudo yum install -y ansible
+yum update
+yum install -y git ansible
 
 mkdir -p ~/workspace
 cd ~/workspace
