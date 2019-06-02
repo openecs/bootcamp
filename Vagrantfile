@@ -59,11 +59,12 @@ Vagrant.configure("2") do |config|
     ops01.vm.box = "ubuntu/xenial64"
     #ops01.vm.box = "centos/7"
     ops01.vm.hostname = "ops01"
+    ops01.vm.network "forwarded_port", guest: 8090, host: 18090
 
     ops01.vm.provider "virtualbox" do |v|
       v.name = "#{ops01.vm.hostname}"
-      v.memory = 1024
-      v.cpus = 1
+      v.memory = 2048
+      v.cpus = 2
     end
 
     config.vm.provision "file", 
