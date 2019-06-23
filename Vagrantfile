@@ -1,6 +1,6 @@
 Vagrant.configure("2") do |config|
   config.vm.network "private_network", :type => 'dhcp'
-  config.vm.synced_folder "~/workspace", "/vagrant", disabled: false
+  config.vm.synced_folder "~/workspace", "/vagrant", disabled: true
   config.vm.box_check_update = false
   config.vbguest.auto_update = false
   config.vagrant.plugins = ["vagrant-hostmanager", "vagrant-vbguest"]
@@ -57,8 +57,8 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "ops01" do |ops01|
     ops01.vm.box = "ubuntu/xenial64"
-    #ops01.vm.box = "centos/7"
-    ops01.vm.hostname = "ops01"
+    ops01.vm.box = "centos/7"
+    #ops01.vm.hostname = "ops01"
     ops01.vm.network "forwarded_port", guest: 8090, host: 18090
 
     ops01.vm.provider "virtualbox" do |v|
@@ -76,8 +76,8 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell",
       path: "scripts/copy-ssh-keys.sh"
 
-    config.vm.provision "shell",
-      path: "scripts/install-ansible-debian.sh"      
+    #config.vm.provision "shell",
+    #  path: "scripts/install-ansible-debian.sh"      
     
     #ops01.vm.provision "ansible" do |ansible|
     #  ansible.playbook = "playbooks/ops-console.yml"

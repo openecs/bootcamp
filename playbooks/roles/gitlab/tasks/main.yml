@@ -1,0 +1,90 @@
+---
+# tasks file for gitlab
+
+- name: include os specific variables.
+  include_vars: "{{ ansible_os_family | lower }}.yml"
+
+- name: check if GitLab configuration file exists.
+  stat: path=/etc/gitlab/gitlab.rb
+  register: gitlab_config_file
+
+- name: check if GitLab is installed.
+  stat: path=/usr/bin/gitlab-ctl
+  register: gitlab_file
+
+- name: install generic os dependencies.
+  package: name={{ item }} state=present
+  with_items:
+    - openssh-server
+    - postfix
+    - curl
+    - openssl
+    - tzdata
+
+- name: download GitLab repo installation script.
+  get_url:
+    url: "{{ gitlab_repo_script_url }}"
+    dest: /tmp/gitlab_repo_install.sh
+    validate_certs: true
+  when: not gitlab_file.stat.exists
+
+- name: install GitLab repository.
+  command: bash /tmp/gitlab_repo_install.sh
+  when: not gitlab_file.stat.exists
+
+
+- name: Define the Gitlab package name.
+  set_fact:
+    gitlab_pkg_name: "{{ gitlab_edition }}{{ gitlab_pkg_separator }}{{ gitlab_version }}"
+  when: gitlab_version != ''
+
+- name: install GitLab
+  package:
+    name: "{{ gitlab_pkg_name | default(gitlab_edition) }}"
+    state: present
+  when: not gitlab_file.stat.exists
+
+# Sometimes the first run fails, but after that, restarts fix problems, so ignore failures.
+- name: reconfigure GitLab.
+  command: >
+    gitlab-ctl reconfigure
+    creates=/var/opt/gitlab/bootstrapped
+  failed_when: false
+
+- name: create GitLab SSL configuration folder.
+  file:
+    path: /etc/gitlab/ssl
+    state: directory
+    owner: root
+    group: root
+    mode: 0700
+  when: gitlab_create_self_signed
+
+- name: create the GitLab directories 
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: git
+    group: root
+    recurse: yes
+  with_items:
+    - "{{ gitlab_git_data_dir }}"
+    - "{{ gitlab_backup_path }}"
+
+- name: create self-signed certificate.
+  command: >
+    openssl req -new -nodes -x509 -subj "{{ gitlab_create_self_signed_subject }}"
+    -days 3650 -keyout {{ gitlab_ssl_certificate_key }} -out {{ gitlab_ssl_certificate }} -extensions v3_ca
+    creates={{ gitlab_ssl_certificate }}
+  when: gitlab_create_self_signed
+
+- name: copy GitLab configuration file.
+  template:
+    src: "gitlab.rb.j2"
+    dest: /etc/gitlab/gitlab.rb
+    owner: root
+    group: root
+    mode: 0600
+    backup: true
+  notify: restart gitlab
+  when: 1==1

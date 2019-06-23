@@ -1,0 +1,7 @@
+- name: install os specific package
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - openldap-clients

@@ -35,5 +35,5 @@
 
   roles:
     - { role: common }
-    - { role: docker } 
+    - { role: gitlab } 
    
