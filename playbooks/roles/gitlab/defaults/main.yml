@@ -25,7 +25,7 @@ gitlab_create_self_signed_subject: "/C=US/ST=California/L=Fremont/O=Ops/CN=gitla
 
 
 ##### LDAP Integration
-gitlab_ldap_enabled: true
+gitlab_ldap_enabled: false
 gitlab_ldap_host: "prodadq1.example.com"
 gitlab_ldap_port: "389"
 gitlab_ldap_uid: "sAMAccountName"
@@ -37,12 +37,12 @@ gitlab_ldap_group_base: "CN=Users,DC=ad,DC=example,DC=com"
 gitlab_ldap_admin_group: ""
 
 ##### Omni Authentication
-gitlab_omniauth_enabled: true
+gitlab_omniauth_enabled: false
 gitlab_google_app_id: ''
 gitlab_google_app_secret: ''
 
 ##### SMTP Configuration
-gitlab_smtp_enabled: true
+gitlab_smtp_enabled: false
 # Gmail parameters
 
 gitlab_smtp_address: 'smtp.gmail.com'
