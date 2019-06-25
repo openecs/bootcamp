@@ -31,11 +31,11 @@
     recurse: yes  
   when: openjdk.stat.exists == false
 
-- name: create a java home symlink 
-  file:
-    path: "/usr/java"
-    src: "{{openjdk_home}}/jdk-{{openjdk_version}}"
-    owner: "{{ openjdk_owner | default('root')}}"
-    group: "{{ openjdk_group | default('root')}}"
-    state: link
+#- name: create a java home symlink 
+#  file:
+#    path: "/usr/java"
+#    src: "{{openjdk_home}}/jdk-{{openjdk_version}}"
+#    owner: "{{ openjdk_owner | default('root')}}"
+#    group: "{{ openjdk_group | default('root')}}"
+#    state: link
 #  when: openjdk.stat.exists == false   

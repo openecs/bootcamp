@@ -1,0 +1,12 @@
+---
+- name: calling Groovy script {{ script_name }}
+  uri:
+    url: "http://localhost:{{ nexus_default_port }}{{ nexus_default_context_path }}{{ nexus_rest_api_endpoint }}/{{ script_name }}/run"
+    user: 'admin'
+    password: "{{ nexus_default_admin_password }}"
+    headers:
+      Content-Type: "text/plain"
+    method: POST
+    status_code: 200,204
+    force_basic_auth: yes
+    body: "{{ args | to_json }}"

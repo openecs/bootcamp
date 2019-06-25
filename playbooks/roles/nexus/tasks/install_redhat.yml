@@ -1,0 +1,8 @@
+- name: install required packages
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - java-1.8.0-openjdk-devel
+  

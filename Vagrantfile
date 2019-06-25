@@ -57,8 +57,8 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "ops01" do |ops01|
     ops01.vm.box = "ubuntu/xenial64"
-    ops01.vm.box = "centos/7"
-    #ops01.vm.hostname = "ops01"
+    #ops01.vm.box = "centos/7"
+    ops01.vm.hostname = "ops01"
     ops01.vm.network "forwarded_port", guest: 8090, host: 18090
 
     ops01.vm.provider "virtualbox" do |v|

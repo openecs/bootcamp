@@ -1,0 +1,29 @@
+---
+# defaults file for nexus
+
+# Download archive
+# http://download.sonatype.com/nexus/3/nexus-3.16.2-01-unix.tar.gz
+# default login http://<hostname>:8081/ admin/admin123
+
+app_env: local
+app_name: nexus
+app_version: 3.16.2-01
+#app_version: 3.17.0-01
+app_major_version: 3
+app_home: "/apps/{{app_name}}"
+app_owner: openecs
+app_group: openecs
+
+app_pkg_name: "nexus-{{app_version}}-unix.tar.gz"
+app_pkg_url: "http://download.sonatype.com/nexus/{{app_major_version}}/{{app_pkg_name}}"
+app_dir_name: "nexus-{{app_version}}"
+
+app_src_dir: "/apps/build/{{app_name}}/dist"
+app_dest_dir: "{{app_home}}"
+
+
+# default properties
+nexus_default_port: 8081
+nexus_default_context_path: '/'
+nexus_default_admin_password: 'admin123'
+
