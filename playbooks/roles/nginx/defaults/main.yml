@@ -1,0 +1,6 @@
+---
+# defaults file for nginx
+
+nginx_ssl_certificate_subject: "/C=US/ST=California/L=Fremont/O=Ops/CN=nginx"
+nginx_ssl_certificate: /etc/nginx/ssl/server.crt
+nginx_ssl_certificate_key: /etc/nginx/ssl/server.key

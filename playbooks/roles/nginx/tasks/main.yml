@@ -1,0 +1,23 @@
+---
+# tasks file for nginx
+
+- name: install nginx.
+  package: name={{ item }} state=present
+  with_items:
+    - nginx
+    - openssl
+
+- name: create certificates directory
+  become: yes
+  file:
+    path: "{{ item | dirname }}"
+    state: directory
+  with_items:
+    - "{{ nginx_ssl_certificate }}"
+    - "{{ nginx_ssl_certificate_key }}"
+
+- name: create self-signed certificate.
+  command: >
+    openssl req -new -nodes -x509 -subj "{{ nginx_ssl_certificate_subject }}"
+    -days 3650 -keyout {{ nginx_ssl_certificate_key }} -out {{ nginx_ssl_certificate }} -extensions v3_ca
+    creates={{ nginx_ssl_certificate }}

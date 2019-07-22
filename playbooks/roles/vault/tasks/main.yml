@@ -1,0 +1,7 @@
+---
+# tasks file for vault
+
+- name: run {{ action }} tasks
+  include_tasks:
+    file: "{{ action }}.yml"
+

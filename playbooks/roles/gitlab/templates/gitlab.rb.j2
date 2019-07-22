@@ -1,22 +1,37 @@
 ##### Configuration Documentation
 
 ## The URL through which GitLab will be accessed.
-external_url "{{ gitlab_external_url }}"
 
 gitlab_rails['time_zone'] = "{{ gitlab_time_zone }}"
 gitlab_rails['backup_keep_time'] = {{ gitlab_backup_keep_time }}
-gitlab_rails['gitlab_default_can_create_group'] = false
 
+### GitLab user privileges
+gitlab_rails['gitlab_default_can_create_group'] = false
+gitlab_rails['gitlab_username_changing_enabled'] = false
+
+{% if gitlab_https_enabled %}
+external_url "https://{{ ansible_hostname }}"
 nginx['redirect_http_to_https'] = {{ gitlab_redirect_http_to_https }}
 nginx['ssl_certificate'] = "{{ gitlab_ssl_certificate }}"
 nginx['ssl_certificate_key'] = "{{ gitlab_ssl_certificate_key }}"
+{% else %}
+external_url "http://{{ ansible_hostname }}"
+{% endif %}
 
-## Data and Backup Directory
+###### Set the data and backup directory
+{% if gitlab_appdata_enabled %}
 git_data_dirs({"default" => {"path" => "{{ gitlab_git_data_dir }}"} })
 gitlab_rails['backup_path'] = "{{ gitlab_backup_path }}"
 
-## LDAP Integration
-## 
+#postgresql['dir'] = "/appdata/gitlab/postgresql"
+postgresql['data_dir'] = "/appdata/gitlab/postgresql/data"
+
+gitlab_rails['lfs_enabled'] = true
+gitlab_rails['lfs_storage_path'] = "/appdata/gitlab/lfs-objects"
+{% endif %}
+
+##### Configure LDAP integration
+
 {% if gitlab_ldap_enabled %}
 gitlab_rails['ldap_enabled'] = true
 gitlab_rails['ldap_servers'] = {

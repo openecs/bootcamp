@@ -8,7 +8,7 @@ http {
   
   server {
     listen   *:443;
-    server_name  repo.example.com;
+    server_name  {{ ansible_hostname }};
   
     # allow large uploads of files
     client_max_body_size 1G;
@@ -17,8 +17,8 @@ http {
     #proxy_max_temp_file_size 2G;
   
     ssl on;
-    ssl_certificate      example.pem;
-    ssl_certificate_key  example.key;
+    ssl_certificate      /etc/nginx/ssl/server.crt;
+    ssl_certificate_key  /etc/nginx/ssl/servier.key;
   
     location / {
       # Use IPv4 upstream address instead of DNS name to avoid attempts by nginx to use IPv6 DNS lookup
@@ -30,3 +30,4 @@ http {
     }
   }
 }
+

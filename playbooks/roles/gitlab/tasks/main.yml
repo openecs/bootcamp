@@ -1,18 +1,7 @@
 ---
 # tasks file for gitlab
 
-- name: include os specific variables.
-  include_vars: "{{ ansible_os_family | lower }}.yml"
-
-- name: check if GitLab configuration file exists.
-  stat: path=/etc/gitlab/gitlab.rb
-  register: gitlab_config_file
-
-- name: check if GitLab is installed.
-  stat: path=/usr/bin/gitlab-ctl
-  register: gitlab_file
-
-- name: install generic os dependencies.
+- name: installing the required packages.
   package: name={{ item }} state=present
   with_items:
     - openssh-server
@@ -21,62 +10,53 @@
     - openssl
     - tzdata
 
+- name: include os specific variables.
+  include_vars: "{{ ansible_os_family | lower }}.yml"
+
+- name: check if GitLab is installed.
+  stat: path=/usr/bin/gitlab-ctl
+  register: gitlab_ctl
+
+- name: check if GitLab postgresql data dir exists.
+  stat: path={{gitlab_appdata_dir}}/postgresql/data
+  register: gitlab_postgresql_data_dir
+
 - name: download GitLab repo installation script.
   get_url:
     url: "{{ gitlab_repo_script_url }}"
     dest: /tmp/gitlab_repo_install.sh
     validate_certs: true
-  when: not gitlab_file.stat.exists
+  when: not gitlab_ctl.stat.exists
 
 - name: install GitLab repository.
   command: bash /tmp/gitlab_repo_install.sh
-  when: not gitlab_file.stat.exists
+  when: not gitlab_ctl.stat.exists
 
-
-- name: Define the Gitlab package name.
+- name: define the Gitlab package name and version to be installed.
   set_fact:
     gitlab_pkg_name: "{{ gitlab_edition }}{{ gitlab_pkg_separator }}{{ gitlab_version }}"
   when: gitlab_version != ''
 
 - name: install GitLab
   package:
-    name: "{{ gitlab_pkg_name | default(gitlab_edition) }}"
+    name: "{{ gitlab_pkg_name | default('gitlab-ce') }}"
     state: present
-  when: not gitlab_file.stat.exists
 
-# Sometimes the first run fails, but after that, restarts fix problems, so ignore failures.
-- name: reconfigure GitLab.
-  command: >
-    gitlab-ctl reconfigure
-    creates=/var/opt/gitlab/bootstrapped
-  failed_when: false
-
-- name: create GitLab SSL configuration folder.
+- name: create GitLab SSL configuration folder if enabled.
   file:
     path: /etc/gitlab/ssl
     state: directory
     owner: root
     group: root
     mode: 0700
-  when: gitlab_create_self_signed
+  when: gitlab_self_signed_enabled
 
-- name: create the GitLab directories 
-  file:
-    path: "{{ item }}"
-    state: directory
-    owner: git
-    group: root
-    recurse: yes
-  with_items:
-    - "{{ gitlab_git_data_dir }}"
-    - "{{ gitlab_backup_path }}"
-
-- name: create self-signed certificate.
+- name: create self-signed certificate if enabled.
   command: >
     openssl req -new -nodes -x509 -subj "{{ gitlab_create_self_signed_subject }}"
     -days 3650 -keyout {{ gitlab_ssl_certificate_key }} -out {{ gitlab_ssl_certificate }} -extensions v3_ca
     creates={{ gitlab_ssl_certificate }}
-  when: gitlab_create_self_signed
+  when: gitlab_self_signed_enabled
 
 - name: copy GitLab configuration file.
   template:
@@ -86,5 +66,34 @@
     group: root
     mode: 0600
     backup: true
-  notify: restart gitlab
-  when: 1==1
+
+# begin special configuration.   
+- name: create the gitlab-psql group
+  group:
+    name: gitlab-psql
+    state: present
+
+- name: create the gitlab-psql user
+  user:
+    name: gitlab-psql
+    group: gitlab-psql
+    state: present    
+
+- name: create the new postgresql directory
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: gitlab-psql
+    group: root
+    mode: 0755    
+    recurse: yes
+  with_items:
+    - "{{ gitlab_appdata_dir }}/postgresql"
+  when: gitlab_appdata_enabled and not gitlab_postgresql_data_dir.stat.exists   
+# end of special configuration
+ 
+- name: reconfigure and start Gitlab
+  shell: |
+      gitlab-ctl reconfigure    
+
+
