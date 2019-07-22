@@ -37,14 +37,14 @@ gitlab_create_self_signed_subject: "/C=US/ST=California/L=Fremont/O=Ops/CN=gitla
 
 ##### LDAP Integration
 gitlab_ldap_enabled: true
-gitlab_ldap_host: "prodadq1.naehas.com"
+gitlab_ldap_host: "prodadq1.example.com"
 gitlab_ldap_port: "389"
 gitlab_ldap_uid: "sAMAccountName"
 gitlab_ldap_method: "tls"
-gitlab_ldap_bind_dn: "jenkinsad@ad.naehas.com"
-gitlab_ldap_password: "n43h4s!!!"
-gitlab_ldap_base: "CN=Users,DC=ad,DC=naehas,DC=com"
-gitlab_ldap_group_base: "CN=Users,DC=ad,DC=naehas,DC=com"
+gitlab_ldap_bind_dn: "jenkinsad@ad.example.com"
+gitlab_ldap_password: ""
+gitlab_ldap_base: "CN=Users,DC=ad,DC=example,DC=com"
+gitlab_ldap_group_base: "CN=Users,DC=ad,DC=example,DC=com"
 gitlab_ldap_admin_group: ""
 
 ##### Omni Authentication
