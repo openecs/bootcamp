@@ -5,6 +5,9 @@
 gitlab_rails['time_zone'] = "{{ gitlab_time_zone }}"
 gitlab_rails['backup_keep_time'] = {{ gitlab_backup_keep_time }}
 
+## opt out usage report
+gitlab_rails['usage_ping_enabled'] = false
+
 ### GitLab user privileges
 gitlab_rails['gitlab_default_can_create_group'] = false
 gitlab_rails['gitlab_username_changing_enabled'] = false
@@ -18,7 +21,10 @@ nginx['ssl_certificate_key'] = "{{ gitlab_ssl_certificate_key }}"
 external_url "http://{{ ansible_hostname }}"
 {% endif %}
 
-###### Set the data and backup directory
+##### Monitoring
+prometheus['listen_address'] = '0.0.0.0:9090'
+
+##### Set the data and backup directory
 {% if gitlab_appdata_enabled %}
 git_data_dirs({"default" => {"path" => "{{ gitlab_git_data_dir }}"} })
 gitlab_rails['backup_path'] = "{{ gitlab_backup_path }}"
@@ -28,6 +34,18 @@ postgresql['data_dir'] = "/appdata/gitlab/postgresql/data"
 
 gitlab_rails['lfs_enabled'] = true
 gitlab_rails['lfs_storage_path'] = "/appdata/gitlab/lfs-objects"
+
+#gitlab_rails['backup_upload_connection'] = {
+#  'provider' => 'AWS',
+#  'region' => 'eu-west-1',
+#  'aws_access_key_id' => 'AKIAKIAKI',
+#  'aws_secret_access_key' => 'secret123'
+  
+#  If using an IAM Profile, don't configure aws_access_key_id & aws_secret_access_key
+#  'use_iam_profile' => true
+#}
+#gitlab_rails['backup_upload_remote_directory'] = 'bucket name, subfolder is not supported'
+
 {% endif %}
 
 ##### Configure LDAP integration

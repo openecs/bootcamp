@@ -97,3 +97,5 @@
       gitlab-ctl reconfigure    
 
 
+# systemctl service name:
+# gitlab-runsvdir

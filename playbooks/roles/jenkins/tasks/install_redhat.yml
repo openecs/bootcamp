@@ -18,7 +18,7 @@
 
 - name: install jenkins lts version
   yum:
-    name: jenkins
+    name: jenkins-{{jenkins_version}}
     state: present
     update_cache: yes    
 
@@ -33,3 +33,6 @@
     state: started
     enabled: yes
     name: jenkins
+
+# show the initial password
+# cat /var/lib/jenkins/secrets/initialAdminPassword    

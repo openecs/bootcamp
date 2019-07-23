@@ -1,0 +1,40 @@
+---
+# This playbook is to setup an Ops console
+
+# Ansible requires Python. Some Linux does not include Python by default. This step is not
+# needed if the VM provisioned with Python installed. 
+- hosts: all
+  become: true
+  gather_facts: false
+
+  pre_tasks:
+  - name: install python (on Debian family) if not present
+    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+    when: 1==1
+
+# Install console roles
+- hosts: all
+  become: yes
+  gather_facts: true
+
+  vars:
+    app_owner: openecs
+    app_group: openecs
+        
+  pre_tasks:
+    - name: create the appliction group if not present
+      user:
+        name: "{{ app_group }}"
+        state: present
+
+    - name: create the applicatin user if not present
+      user:
+        name: "{{ app_owner }}"
+        group: "{{ app_group }}"
+        state: present  
+
+  roles:
+    - { role: common }
+    - { role: nginx }
+    - { role: jenkins } 
+   

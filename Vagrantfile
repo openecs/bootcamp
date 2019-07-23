@@ -80,7 +80,7 @@ Vagrant.configure("2") do |config|
     #  path: "scripts/install-ansible-debian.sh"      
     
     ops01.vm.provision "ansible" do |ansible|
-      ansible.playbook = "playbooks/gitlab-playbook.yml"
+      ansible.playbook = "playbooks/jenkins-playbook.yml"
     end    
 
     ops01.trigger.before [:destroy] do |trigger|

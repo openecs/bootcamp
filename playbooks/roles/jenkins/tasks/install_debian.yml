@@ -20,7 +20,7 @@
 
 - name: install jenkins lts version
   apt:
-    name: jenkins
+    name: jenkins={{jenkins_version}}
     state: present
     update_cache: yes    
 
