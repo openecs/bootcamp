@@ -49,8 +49,10 @@ gitlab_rails['lfs_storage_path'] = "/appdata/gitlab/lfs-objects"
 {% endif %}
 
 ##### Configure LDAP integration
-
 {% if gitlab_ldap_enabled %}
+## To troubleshoot
+## gitlab-rake gitlab:ldap:check --trace
+
 gitlab_rails['ldap_enabled'] = true
 gitlab_rails['ldap_servers'] = {
   'main' => {
